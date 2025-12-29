@@ -1,0 +1,173 @@
+"fetch detected"
+"| fetch not detected"
+"`fetch detected`
+'fetch detected'
+`fetch ${'fetch not detected'} suffix`
+
+"data detected"
+"| data not detected"
+"`data detected`
+' data detected'
+`data ${"data not detected"} suffix`
+
+"timeseries detected"
+"| timeseries not detected"
+`timeseries detected`
+'timeseries detected'
+`timeseries ${`timeseries not detected`} stuff`
+
+"metrics detected"
+"| metrics not detected"
+` metrics detected`
+'metrics detected'
+`metrics ${'metrics not detected'} check`
+
+"| sort detected"
+"sort not detected"
+`| sort detected`
+'| sort detected'
+`| sort ${'| sort error'} detected`
+
+"| dedup detected"
+"dedup not detected"
+`| dedup detected`
+' | dedup detected'
+`| dedup ${"| dedup error"} detected`
+
+"| filter detected"
+"filter not detected"
+`| filter detected`
+'| filter detected'
+`| filter ${'| filter error'} detected`
+
+"| filterOut detected"
+"filterOut not detected"
+`| filterOut detected`
+'| filterOut detected'
+`| filterOut ${'| filterOut error'} detected`
+
+"| search detected"
+"search not detected"
+`| search detected`
+'| search detected'
+`| search ${'| search error'} detected`
+
+"| fields detected"
+"fields not detected"
+`| fields detected`
+'| fields detected'
+`| fields ${'| fields error'} detected`
+
+"| fieldsAdd detected"
+"fieldsAdd not detected"
+`| fieldsAdd detected`
+'| fieldsAdd detected'
+`| fieldsAdd ${'| fieldsAdd error'} detected`
+
+"| fieldsKeep detected"
+"fieldsKeep not detected"
+`| fieldsKeep detected`
+'| fieldsKeep detected'
+`| fieldsKeep ${'| fieldsKeep error'} detected`
+
+"| fieldsRemove detected"
+"fieldsRemove not detected"
+`| fieldsRemove detected`
+'| fieldsRemove detected'
+`| fieldsRemove ${'| fieldsRemove error'} detected`
+
+"| fieldsRename detected"
+"fieldsRename not detected"
+`| fieldsRename detected`
+'| fieldsRename detected'
+`| fieldsRename ${'| fieldsRename error'} detected`
+
+"| parse detected"
+"parse not detected"
+`| parse detected`
+'| parse detected'
+`| parse ${'| parse error'} detected`
+
+"| limit detected"
+"limit not detected"
+`| limit detected`
+'| limit detected'
+`| limit ${'| limit error'} detected`
+
+"| sort detected 2"
+"sort not detected 2"
+`| sort detected 2`
+'| sort detected 2'
+`| sort ${'| sort error 2'} detected`
+
+"| expand detected"
+"expand not detected"
+`| expand detected`
+'| expand detected'
+`| expand ${'| expand error'} detected`
+
+"| fieldsFlatten detected"
+"fieldsFlatten not detected"
+`| fieldsFlatten detected`
+'| fieldsFlatten detected'
+`| fieldsFlatten ${'| fieldsFlatten error'} detected`
+
+"| fieldsSummary detected"
+"fieldsSummary not detected"
+`| fieldsSummary detected`
+'| fieldsSummary detected'
+`| fieldsSummary ${'| fieldsSummary error'} detected`
+
+"| makeTimeseries detected"
+"makeTimeseries not detected"
+`| makeTimeseries detected`
+'| makeTimeseries detected'
+`| makeTimeseries ${'| makeTimeseries error'} detected`
+
+"| summarize detected"
+"summarize not detected"
+`| summarize detected`
+'| summarize detected'
+`| summarize ${'| summarize error'} detected`
+
+"| append detected"
+"append not detected"
+`| append detected`
+'| append detected'
+`| append ${'| append error'} detected`
+
+"| join detected"
+"join not detected"
+`| join detected`
+'| join detected'
+`| join ${'| join start'} detected`
+
+"| joinNested detected"
+"joinNested not detected"
+`| joinNested detected`
+'| joinNested detected'
+`| joinNested ${'| joinNested error'} detected`
+
+"| lookup detected"
+"lookup not detected"
+`| lookup detected`
+'| lookup detected'
+`| lookup ${'| lookup error'} detected`
+
+"| smartscapeNodes detected"
+"smartscapeNodes not detected"
+`| smartscapeNodes detected`
+'| smartscapeNodes detected'
+`| smartscapeNodes ${'| smartscapeNodes error'} detected`
+
+"| smartscapeEdges detected"
+"smartscapeEdges not detected"
+`| smartscapeEdges detected`
+'| smartscapeEdges detected'
+`| smartscapeEdges ${'| smartscapeEdges error'} detected`
+
+"| traverse detected"
+"traverse not detected"
+`| traverse detected`
+'| traverse detected'
+`| traverse ${'| traverse error'} detected`
