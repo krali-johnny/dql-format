@@ -72,8 +72,6 @@ describe('collectTargetFiles', () => {
   });
 
   test('throws when path does not exist', () => {
-
-  test('throws when path does not exist', () => {
     expect(() => collectTargetFiles(['definitely-does-not-exist-123.txt'])).toThrow(
       /Path not found:/,
     );
