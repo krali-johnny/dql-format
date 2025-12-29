@@ -84,10 +84,13 @@ if (require.main === module) {
       parseFile(file);
     }
   } catch (err) {
-    if (err instanceof Error && err.message.startsWith('Path not found:')) {
-      const missingPath = err.message.slice('Path not found: '.length);
-      console.error(`File not found: ${missingPath}`);
-      process.exit(2);
+    if (err instanceof Error) {
+      const match = err.message.match(/^Path not found:\s*(.+)$/);
+      if (match) {
+        const missingPath = match[1];
+        console.error(`File not found: ${missingPath}`);
+        process.exit(2);
+      }
     }
 
     console.error(err instanceof Error ? err.message : String(err));
