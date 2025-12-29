@@ -85,7 +85,8 @@ if (require.main === module) {
     }
   } catch (err) {
     if (err instanceof Error && err.message.startsWith('Path not found:')) {
-      console.error(err.message.replace('Path not found', 'File not found'));
+      const suffix = err.message.slice('Path not found'.length);
+      console.error(`File not found${suffix}`);
       process.exit(2);
     }
 
