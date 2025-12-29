@@ -7,7 +7,7 @@ A CLI tool to parse files and search for DQL commands to pass them to the DQL fo
 Install dependencies:
 
 ```bash
-npm install 
+npm install
 ```
 
 Run tests:

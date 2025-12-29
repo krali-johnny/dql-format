@@ -32,10 +32,9 @@ describe('dql-format CLI', () => {
 
   test.skip('prints each DQL command on its own line', () => {
     const tmpFile = path.join(__dirname, 'tmp-with-dql.txt');
-    const content = [
-      'const q1 = "data from logs";',
-      'const q2 = "| filter status == 200";',
-    ].join('\n');
+    const content = ['const q1 = "data from logs";', 'const q2 = "| filter status == 200";'].join(
+      '\n',
+    );
     fs.writeFileSync(tmpFile, content);
 
     const result = spawnSync(nodeBin, [cliPath, tmpFile], { encoding: 'utf-8' });
@@ -47,4 +46,3 @@ describe('dql-format CLI', () => {
     expect(lines).toEqual(['data from logs', '| filter status == 200']);
   });
 });
-
