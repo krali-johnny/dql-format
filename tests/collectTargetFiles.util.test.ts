@@ -68,10 +68,10 @@ describe('collectTargetFiles', () => {
 
     const result = collectTargetFiles([baseDir]);
 
-    expect(result).toEqual(
-      [file1, file2, file3].map((f) => path.resolve(f)).sort(),
-    );
+    expect(result).toEqual([file1, file2, file3].map((f) => path.resolve(f)).sort());
   });
+
+  test('throws when path does not exist', () => {
 
   test('throws when path does not exist', () => {
     expect(() => collectTargetFiles(['definitely-does-not-exist-123.txt'])).toThrow(
