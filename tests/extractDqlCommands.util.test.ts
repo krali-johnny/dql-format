@@ -1,4 +1,4 @@
-import { extractDqlCommands } from '../src';
+import { extractDqlCommands } from '../src/utils/extractDqlCommands.util';
 
 describe('extractDqlCommands', () => {
   test('extracts only DQL strings and strips surrounding quotes', () => {

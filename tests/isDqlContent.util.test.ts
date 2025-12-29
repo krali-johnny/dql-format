@@ -1,4 +1,4 @@
-import { isDqlContent } from '../src';
+import {isDqlContent} from "../src/utils/isDqlContent.util";
 
 describe('isDqlContent', () => {
   test('returns true for root commands without quotes', () => {

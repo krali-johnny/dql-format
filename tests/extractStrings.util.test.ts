@@ -1,4 +1,4 @@
-import { extractStrings } from '../src';
+import {extractStrings} from "../src/utils/extractStrings.util";
 
 describe('extractStrings', () => {
   test('extracts single and double quoted strings', () => {
