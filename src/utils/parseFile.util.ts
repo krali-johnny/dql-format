@@ -4,7 +4,9 @@ import { extractDqlCommands } from './extractDqlCommands.util';
 import { formatDqlCommand } from './formatDqlCommand.util';
 
 export function parseFile(filename: string): void {
-  const filePath = path.resolve(process.cwd(), filename);
+  const filePath = path.isAbsolute(filename)
+    ? filename
+    : path.resolve(process.cwd(), filename);
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {

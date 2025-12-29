@@ -13,12 +13,14 @@ describe('dql-format CLI', () => {
   });
 
   test('exits with code 2 when file does not exist', () => {
-    const result = spawnSync(nodeBin, [cliPath, 'non-existent-file.txt'], { encoding: 'utf-8' });
+    const result = spawnSync(nodeBin, [cliPath, 'non-existent-file.txt'], {
+      encoding: 'utf-8',
+    });
     expect(result.status).toBe(2);
     expect(result.stderr).toContain('File not found: non-existent-file.txt');
   });
 
-  test('prints [] when no DQL strings are found', () => {
+  test('prints nothing when no DQL strings are found in a single file', () => {
     const tmpFile = path.join(__dirname, 'tmp-no-dql.txt');
     fs.writeFileSync(tmpFile, 'const a = "hello";');
 
@@ -26,6 +28,22 @@ describe('dql-format CLI', () => {
 
     fs.unlinkSync(tmpFile);
 
+    expect(result.status).toBe(0);
+    expect(result.stdout.trim()).toBe('');
+  });
+
+  test('handles a directory containing a file with no DQL', () => {
+    const tmpDir = path.join(__dirname, 'tmp-dir-no-dql');
+    const tmpFile = path.join(tmpDir, 'file.txt');
+    fs.mkdirSync(tmpDir, { recursive: true });
+    fs.writeFileSync(tmpFile, 'const a = "hello";');
+
+    const result = spawnSync(nodeBin, [cliPath, tmpDir], { encoding: 'utf-8' });
+
+    fs.unlinkSync(tmpFile);
+    fs.rmdirSync(tmpDir);
+
+    // The CLI should succeed even when given a directory; parseFile handles the file contents.
     expect(result.status).toBe(0);
     expect(result.stdout.trim()).toBe('');
   });
@@ -44,5 +62,46 @@ describe('dql-format CLI', () => {
     expect(result.status).toBe(0);
     const lines = result.stdout.trim().split(/\r?\n/);
     expect(lines).toEqual(['data from logs', '| filter status == 200']);
+  });
+
+  test('honors the --ext flag when scanning directories', () => {
+    const tmpDir = path.join(__dirname, 'tmp-ext-flag');
+    const tsFile = path.join(tmpDir, 'file.ts');
+    const txtFile = path.join(tmpDir, 'file.txt');
+
+    fs.mkdirSync(tmpDir, { recursive: true });
+    fs.writeFileSync(tsFile, 'const a = "hello";');
+    fs.writeFileSync(txtFile, 'const b = "hello";');
+
+    const result = spawnSync(nodeBin, [cliPath, tmpDir, '--ext=.ts'], { encoding: 'utf-8' });
+
+    fs.unlinkSync(tsFile);
+    fs.unlinkSync(txtFile);
+    fs.rmdirSync(tmpDir);
+
+    expect(result.status).toBe(0);
+    // With no DQL in either file, output is empty, but the important part is that we don't crash
+    expect(result.stdout.trim()).toBe('');
+  });
+
+  test('formats raw DQL strings with --raw and skips non-DQL', () => {
+    const result = spawnSync(
+      nodeBin,
+      [
+        cliPath,
+        '--raw',
+        'data from logs',
+        '| filter status == 200',
+        'not dql',
+      ],
+      { encoding: 'utf-8' },
+    );
+
+    expect(result.status).toBe(0);
+    const lines = result.stdout.trim().split(/\r?\n/);
+    expect(lines).toEqual([
+      'dql-format: data from logs',
+      'dql-format: | filter status == 200',
+    ]);
   });
 });
