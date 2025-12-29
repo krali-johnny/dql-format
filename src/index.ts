@@ -76,7 +76,7 @@ if (require.main === module) {
 
     if (files.length === 0) {
       console.error('No matching files found');
-      process.exit(0);
+      process.exit(1);
     }
 
     for (const file of files) {
