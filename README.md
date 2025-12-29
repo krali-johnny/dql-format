@@ -4,16 +4,17 @@ A CLI tool to parse files and search for DQL commands to pass them to the DQL fo
 
 ## Usage
 
-Build the project first so the CLI entrypoint is available in `dist`:
+Build the project first so the CLI entrypoint is available in `dist` and then link it globally:
 
 ```bash
 npm run build
+npm link
 ```
 
-Then run the CLI with Node:
+After linking, you can use the `dql-format` command directly:
 
 ```bash
-node dist/index.js <path...> [--ext=.ts,.tsx]
+dql-format <path...> [--ext=.ts,.tsx]
 ```
 
 Where `<path...>` can be one or more:
@@ -48,7 +49,7 @@ For every matching file, the tool:
 You can also format raw DQL strings directly, without reading from files, using the `--raw` flag:
 
 ```bash
-node dist/index.js --raw "data from logs" "| filter status == 200"
+dql-format --raw "data from logs" "| filter status == 200"
 ```
 
 In this mode, each argument after `--raw` is treated as a DQL command string and passed directly to
@@ -59,37 +60,37 @@ In this mode, each argument after `--raw` is treated as a DQL command string and
 Parse a single file:
 
 ```bash
-node dist/index.js examples/sample.ts
+dql-format examples/sample.ts
 ```
 
 Parse multiple files:
 
 ```bash
-node dist/index.js src/file1.ts src/file2.ts tests/sample.txt
+dql-format src/file1.ts src/file2.ts tests/sample.txt
 ```
 
 Parse an entire directory (recursively):
 
 ```bash
-node dist/index.js src
+dql-format src
 ```
 
 Mix files and directories:
 
 ```bash
-node dist/index.js src tests some-other-file.dql
+dql-format src tests some-other-file.dql
 ```
 
 Restrict to specific extensions:
 
 ```bash
-node dist/index.js src --ext=.ts,.tsx
+dql-format src --ext=.ts,.tsx
 ```
 
 Format raw DQL strings:
 
 ```bash
-node dist/index.js --raw "data from logs" "| filter status == 200"
+dql-format --raw "data from logs" "| filter status == 200"
 ```
 
 ### Exit codes
@@ -156,8 +157,14 @@ Build the TypeScript sources:
 npm run build
 ```
 
-After building, you can run the CLI directly:
+Link the CLI globally for local development:
 
 ```bash
-node dist/index.js <path...> [--ext=.ts,.tsx]
+npm link
+```
+
+After linking, you can run the CLI directly using the installed command:
+
+```bash
+dql-format <path...> [--ext=.ts,.tsx]
 ```
