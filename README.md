@@ -120,8 +120,44 @@ Run tests:
 npm test
 ```
 
-Build:
+Run tests in watch mode:
+
+```bash
+npm run test:watch
+```
+
+Lint source and tests:
+
+```bash
+npm run lint
+```
+
+Fix lint issues automatically:
+
+```bash
+npm run lint:fix
+```
+
+Format code and docs with Prettier:
+
+```bash
+npm run format
+```
+
+Check formatting without writing changes:
+
+```bash
+npm run format:check
+```
+
+Build the TypeScript sources:
 
 ```bash
 npm run build
+```
+
+After building, you can run the CLI directly:
+
+```bash
+node dist/index.js <path...> [--ext=.ts,.tsx]
 ```
