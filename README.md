@@ -98,10 +98,10 @@ dql-format --raw "data from logs" "| filter status == 200"
 The CLI uses the following exit codes:
 
 - `0` – Success
-  - At least one path was provided and processed, or raw strings were formatted.
-  - If no matching files are found under the given paths, it prints `No matching files found` and still exits with `0`.
-- `1` – Incorrect usage
+  - At least one path was provided and at least one file was processed, or raw strings were formatted.
+- `1` – Incorrect usage or no matching files
   - No positional paths were provided in file mode, or no strings were provided in `--raw` mode.
+  - If no matching files are found under the given paths, it prints `No matching files found` and exits with `1`.
 - `2` – File or path not found
   - At least one of the provided paths does not exist.
 - `3` – Error reading a file
