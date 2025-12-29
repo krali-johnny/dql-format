@@ -37,7 +37,7 @@ if (require.main === module) {
 
       const formatted = formatDqlCommand(s);
       if (formatted) {
-        console.log(`dql-format: ${formatted}`);
+        console.log(formatted);
       }
     });
 
