@@ -43,6 +43,17 @@ For every matching file, the tool:
 2. Extracts strings that contain DQL queries.
 3. Formats each DQL command and prints it to `stdout`, one per line.
 
+### Raw string mode
+
+You can also format raw DQL strings directly, without reading from files, using the `--raw` flag:
+
+```bash
+node dist/index.js --raw "data from logs" "| filter status == 200"
+```
+
+In this mode, each argument after `--raw` is treated as a DQL command string and passed directly to
+`formatDqlCommand`, and the formatted result is printed to `stdout`.
+
 ### Examples
 
 Parse a single file:
@@ -75,15 +86,21 @@ Restrict to specific extensions:
 node dist/index.js src --ext=.ts,.tsx
 ```
 
+Format raw DQL strings:
+
+```bash
+node dist/index.js --raw "data from logs" "| filter status == 200"
+```
+
 ### Exit codes
 
 The CLI uses the following exit codes:
 
 - `0` – Success
-  - At least one path was provided and processed.
+  - At least one path was provided and processed, or raw strings were formatted.
   - If no matching files are found under the given paths, it prints `No matching files found` and still exits with `0`.
 - `1` – Incorrect usage
-  - No positional paths were provided.
+  - No positional paths were provided in file mode, or no strings were provided in `--raw` mode.
 - `2` – File or path not found
   - At least one of the provided paths does not exist.
 - `3` – Error reading a file

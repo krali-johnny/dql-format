@@ -83,4 +83,25 @@ describe('dql-format CLI', () => {
     // With no DQL in either file, output is empty, but the important part is that we don't crash
     expect(result.stdout.trim()).toBe('');
   });
+
+  test('formats raw DQL strings with --raw and skips non-DQL', () => {
+    const result = spawnSync(
+      nodeBin,
+      [
+        cliPath,
+        '--raw',
+        'data from logs',
+        '| filter status == 200',
+        'not dql',
+      ],
+      { encoding: 'utf-8' },
+    );
+
+    expect(result.status).toBe(0);
+    const lines = result.stdout.trim().split(/\r?\n/);
+    expect(lines).toEqual([
+      'dql-format: data from logs',
+      'dql-format: | filter status == 200',
+    ]);
+  });
 });

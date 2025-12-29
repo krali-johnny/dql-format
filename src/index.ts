@@ -2,10 +2,47 @@
 
 import { parseFile } from './utils/parseFile.util';
 import { collectTargetFiles } from './utils/collectTargetFiles.util';
+import { formatDqlCommand } from './utils/formatDqlCommand.util';
+import { isDqlContent } from './utils/isDqlContent.util';
 
 // CLI Entry Point - only execute when run directly, not when imported as a module
 if (require.main === module) {
   const argv = process.argv.slice(2);
+
+  // Raw-string mode: dql-format --raw "dql query" ["another query" ...]
+  if (argv[0] === '--raw') {
+    const rawValues = argv.slice(1);
+    if (rawValues.length === 0) {
+      console.error('Usage: dql-format --raw <dql-string...>');
+      process.exit(1);
+    }
+
+    rawValues.forEach((value) => {
+      if (!isDqlContent(value)) {
+        return;
+      }
+
+      let s = value;
+      if (s.length >= 2) {
+        const first = s[0];
+        const last = s[s.length - 1];
+        if (
+          (first === '"' && last === '"') ||
+          (first === "'" && last === "'") ||
+          (first === '`' && last === '`')
+        ) {
+          s = s.substring(1, s.length - 1);
+        }
+      }
+
+      const formatted = formatDqlCommand(s);
+      if (formatted) {
+        console.log(formatted);
+      }
+    });
+
+    process.exit(0);
+  }
 
   // Simple flag parsing for --ext=.ts,.tsx and positional paths
   const extensions: string[] = [];
